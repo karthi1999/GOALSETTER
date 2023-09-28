@@ -1,11 +1,14 @@
 const express = require('express')
 const { getGoal, setGoal, updateGoal, deleteGoal } = require('../contollers/getContollers')
 const router = express.Router()
+const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').get(getGoal).post(setGoal)
+router.route('/').get(protect, getGoal).post(protect, setGoal)
+router.route('/:id').put(protect, updateGoal).delete(protect, deleteGoal)
 
-// router.get('/', getGoal)
-// router.post('/', setGoal)
-router.put('/:id', updateGoal)
-router.delete('/:id', deleteGoal)
+// Handle routes without an id parameter
+router.use((req, res, next) => {
+  res.status(404).json({ error: 'url not found' });
+});
+
 module.exports = router
