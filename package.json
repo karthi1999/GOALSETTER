@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Karthi",
   "license": "ISC",
@@ -19,6 +21,7 @@
     "mongoose": "^7.5.2"
   },
   "devDependencies": {
+    "concurrently": "^8.2.1",
     "nodemon": "^3.0.1"
   }
 }
