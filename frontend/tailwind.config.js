@@ -1,13 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: [
+    "./src/**/*.html",   // Include all HTML files in the src directory and its subdirectories
+    "./src/**/*.jsx",    // Include all JSX files in the src directory and its subdirectories
+    // Add more paths or patterns as needed
+  ],
   theme: {
     extend: {
       height: {
-        fullscreen: "calc(100hv - 100px)"
+        'fs': 'calc(100vh - 100px)'
       }
     },
   },
   plugins: [],
 }
-

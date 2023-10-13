@@ -4,21 +4,30 @@ const API_URL = '/api/users/'
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL, userData)
+  const response = await axios.post(API_URL, userData);
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
+    const userWithExpiration = {
+      data: response.data,
+      expiration: Date.now() + 2 * 24 * 60 * 60 * 1000, // 2 days in milliseconds
+    };
+    localStorage.setItem('user', JSON.stringify(userWithExpiration));
   }
-  return response.data
+  return response.data;
 }
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL + "userlogin", userData)
+  const response = await axios.post(API_URL + "userlogin", userData);
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
+    const userWithExpiration = {
+      data: response.data,
+      expiration: Date.now() + 2 * 24 * 60 * 60 * 1000, // 2 days in milliseconds
+    };
+    localStorage.setItem('user', JSON.stringify(userWithExpiration));
   }
-  return response.data
+  return response.data;
 }
+
 
 // Logout user
 const logout = async () => {

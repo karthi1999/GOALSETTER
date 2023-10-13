@@ -5,16 +5,19 @@ import Login from "../src/pages/Login"
 import Dashboard from "../src/pages/Dashboard"
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <>
       <Router>
-        <Header />
+        {user && <Header />}
         <Routes>
-          <Route exact path="/" element={<Register />} />
+          <Route path="/" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
       <ToastContainer />
